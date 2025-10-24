@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 2.2 Standards Alignment</title>
+    <title>Lesson 2.2: The AI Way - Learning by Example - State Standards Alignment</title>
     <style>
         * {
             margin: 0;
@@ -14,32 +14,36 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            background-color: #f5f5f5;
-            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
             background: white;
-            min-height: 100vh;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 40px 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
         }
 
         .header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.2em;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .header .subtitle {
-            font-size: 1.1em;
-            opacity: 0.95;
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
 
         .lesson-info {
@@ -60,841 +64,733 @@
             padding: 30px;
         }
 
-        .intro-box {
-            background: #e8f4f8;
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #2196F3;
-            margin-bottom: 30px;
-        }
-
         .selector-section {
-            margin-bottom: 30px;
-            background: white;
+            background: #e8f4f8;
             padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .selector-section label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: #667eea;
-            font-size: 1.1em;
-        }
-
-        select {
-            width: 100%;
-            padding: 12px 15px;
-            font-size: 1em;
+            border-radius: 10px;
+            margin-bottom: 30px;
             border: 2px solid #667eea;
-            border-radius: 6px;
-            background-color: white;
+        }
+
+        .selector-label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .state-selector {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: white;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        select:hover {
-            border-color: #764ba2;
-            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
-        }
-
-        select:focus {
+        .state-selector:focus {
             outline: none;
-            border-color: #764ba2;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
         }
 
-        .standards-content {
+        .standards-display {
             display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .standards-content.active {
-            display: block;
+            animation: fadeIn 0.5s ease-in;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .standard-section {
-            background: white;
-            padding: 25px;
+        .standards-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
             margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-left: 4px solid #667eea;
         }
 
-        .standard-section h2 {
+        .standards-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .standards-section {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .standards-section h3 {
             color: #667eea;
+            font-size: 1.3rem;
             margin-bottom: 15px;
-            font-size: 1.4em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 5px;
         }
 
         .standard-item {
-            background: #f8f9ff;
+            background: white;
+            margin: 10px 0;
             padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 6px;
-            border-left: 3px solid #764ba2;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .standard-code {
-            font-weight: 700;
-            color: #764ba2;
-            font-size: 1.05em;
-            margin-bottom: 8px;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9rem;
         }
 
-        .standard-description {
+        .standard-text {
+            margin-top: 5px;
             color: #555;
-            margin-bottom: 10px;
-            line-height: 1.6;
         }
 
-        .alignment-note {
-            background: #e8f4f8;
-            padding: 12px;
-            border-radius: 4px;
-            font-size: 0.95em;
-            color: #0277bd;
-            margin-top: 10px;
-        }
-
-        .alignment-note strong {
-            color: #01579b;
-        }
-
-        .framework-note {
+        .lesson-note {
             background: #fff3e0;
             padding: 15px;
-            border-radius: 6px;
-            border-left: 3px solid #ff9800;
-            margin-top: 20px;
-            font-size: 0.95em;
-        }
-
-        .key-connections {
-            background: #f1f8e9;
-            padding: 20px;
             border-radius: 8px;
-            margin-top: 25px;
-            border-left: 4px solid #8bc34a;
+            margin-top: 20px;
+            border-left: 4px solid #ff9800;
         }
 
-        .key-connections h3 {
-            color: #558b2f;
-            margin-bottom: 12px;
+        .lesson-note strong {
+            color: #e65100;
         }
 
-        .key-connections ul {
-            padding-left: 20px;
-        }
-
-        .key-connections li {
-            margin-bottom: 8px;
-            color: #555;
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="header">
+            <h1>Lesson 2.2: The AI Way - Learning by Example</h1>
+            <p>State Standards Alignment</p>
+            <div class="lesson-info">
+                <div><strong>Type:</strong> Lesson Day</div>
+                <div><strong>Chapter:</strong> 2</div>
+                <div><strong>Duration:</strong> 50 minutes</div>
+            </div>
+        </div>
 
-<div class="container">
-    <div class="header">
-        <h1>📋 State Standards Alignment</h1>
-        <p class="subtitle">Lesson 2.2: The AI Way - Learning by Example</p>
-        <div class="lesson-info">
-            <div><strong>Chapter:</strong> 2</div>
-            <div><strong>Type:</strong> Lesson Day</div>
-            <div><strong>Duration:</strong> 50 minutes</div>
+        <div class="content">
+            <div class="lesson-note">
+                <strong>About This Lesson:</strong> Lesson 2.2 introduces machine learning—how AI discovers patterns from examples without explicit programming. Students learn the revolutionary mechanism behind modern AI and understand both its capabilities and critical limitations including bias in training data.
+            </div>
+
+            <div class="selector-section">
+                <div class="selector-label">Select your state or standards framework:</div>
+                <select id="stateSelector" class="state-selector">
+                    <option value="">Choose your state...</option>
+                    <option value="texas">Texas (TEKS)</option>
+                    <option value="california">California</option>
+                    <option value="florida">Florida</option>
+                    <option value="new_york">New York</option>
+                    <option value="pennsylvania">Pennsylvania</option>
+                    <option value="illinois">Illinois</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="georgia">Georgia</option>
+                    <option value="north_carolina">North Carolina</option>
+                    <option value="michigan">Michigan</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="washington">Washington</option>
+                    <option value="mississippi">Mississippi</option>
+                    <option value="colorado">Colorado</option>
+                    <option value="ccss_math">Common Core State Standards (CCSS) - Math</option>
+                    <option value="ngss">Next Generation Science Standards (NGSS)</option>
+                    <option value="iste">ISTE Standards for Students</option>
+                    <option value="csta">CSTA K-12 Computer Science Standards</option>
+                    <option value="c3">C3 Framework for Social Studies</option>
+                </select>
+            </div>
+
+            <div id="standardsDisplay" class="standards-display">
+                <!-- Standards content will be populated here -->
+            </div>
         </div>
     </div>
 
-    <div class="content">
-        <div class="intro-box">
-            <p><strong>Lesson Focus:</strong> Introduction to machine learning - how AI discovers patterns from examples without explicit programming. Students learn the fundamental mechanism behind modern AI, understanding both its revolutionary capabilities and important limitations including bias in training data.</p>
-        </div>
+    <script>
+        const standardsData = {
+            texas: {
+                title: "Texas Essential Knowledge and Skills (TEKS)",
+                sections: {
+                    "Technology Applications": [
+                        {
+                            code: "§112.34(c)(1)(E)",
+                            text: "Identify, understand, and use appropriate digital learning terminology."
+                        },
+                        {
+                            code: "§112.34(c)(3)(A)",
+                            text: "Evaluate the appropriateness of different tools for completing a task."
+                        },
+                        {
+                            code: "§112.34(c)(6)(A)",
+                            text: "Identify the steps required to complete a task and create algorithms."
+                        }
+                    ],
+                    "Social Studies Skills": [
+                        {
+                            code: "§113.41(c)(1)(B)",
+                            text: "Analyze and evaluate the validity of information, arguments, and counterarguments from primary and secondary sources for bias, propaganda, point of view, and frame of reference."
+                        },
+                        {
+                            code: "§113.41(c)(21)(A)",
+                            text: "Explain the roles of science and technology in contemporary society."
+                        }
+                    ]
+                }
+            },
+            california: {
+                title: "California Computer Science Standards",
+                sections: {
+                    "Algorithms and Programming": [
+                        {
+                            code: "6-8.AP.2",
+                            text: "Evaluate and refine computational artifacts with the goal of making them more inclusive and accessible."
+                        },
+                        {
+                            code: "9-12.AP.3",
+                            text: "Explain how artificial intelligence works and demonstrate its societal and economic impact."
+                        }
+                    ],
+                    "Data and Analysis": [
+                        {
+                            code: "9-12.DA.1",
+                            text: "Explain how data can be organized, interpreted, and used to construct new knowledge."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "9-12.IC.2",
+                            text: "Evaluate the ways that computing impacts personal, ethical, social, and economic practices."
+                        }
+                    ]
+                }
+            },
+            florida: {
+                title: "Florida Computer Science Standards",
+                sections: {
+                    "Computer Science": [
+                        {
+                            code: "SC.912.CS-CS.3.2",
+                            text: "Explain how different types of data are processed and stored."
+                        },
+                        {
+                            code: "SC.912.CS-CP.2.4",
+                            text: "Describe how artificial intelligence algorithms work."
+                        },
+                        {
+                            code: "SC.912.CS-PC.3.1",
+                            text: "Evaluate the beneficial and harmful effects of emerging technologies on society."
+                        }
+                    ]
+                }
+            },
+            new_york: {
+                title: "New York Computer Science and Digital Fluency Standards",
+                sections: {
+                    "Computational Thinking": [
+                        {
+                            code: "9-12.CT.9",
+                            text: "Explain how machine learning and artificial intelligence work."
+                        },
+                        {
+                            code: "9-12.CT.10",
+                            text: "Discuss the ethical, social, and economic implications of artificial intelligence."
+                        }
+                    ],
+                    "Digital Literacy": [
+                        {
+                            code: "9-12.DL.2",
+                            text: "Evaluate the validity and credibility of digital content."
+                        }
+                    ]
+                }
+            },
+            pennsylvania: {
+                title: "Pennsylvania Computer Science Standards",
+                sections: {
+                    "Data and Analysis": [
+                        {
+                            code: "15.4.8-12.D",
+                            text: "Use and interpret data to solve problems and make informed decisions."
+                        }
+                    ],
+                    "Algorithms and Programming": [
+                        {
+                            code: "15.4.8-12.E",
+                            text: "Demonstrate how algorithms make use of iteration and selection to solve problems."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "15.4.8-12.G",
+                            text: "Evaluate the social and ethical ramifications of computing technologies."
+                        }
+                    ]
+                }
+            },
+            illinois: {
+                title: "Illinois Computer Science Standards",
+                sections: {
+                    "Data and Analysis": [
+                        {
+                            code: "9-12.DA.7",
+                            text: "Evaluate the ability of models and simulations to formulate, refine, and test hypotheses."
+                        }
+                    ],
+                    "Algorithms and Programming": [
+                        {
+                            code: "9-12.AP.17",
+                            text: "Describe how artificial intelligence drives many software and physical systems."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "9-12.IC.25",
+                            text: "Evaluate computational artifacts with regard to improving their beneficial effects and reducing harmful effects on different groups of users."
+                        }
+                    ]
+                }
+            },
+            ohio: {
+                title: "Ohio Computer Science Standards",
+                sections: {
+                    "Algorithms and Programming": [
+                        {
+                            code: "ATP.M.9-10.1",
+                            text: "Use data and information to make informed decisions about computational artifacts and solving problems."
+                        }
+                    ],
+                    "Artificial Intelligence": [
+                        {
+                            code: "AI.A.9-12.2",
+                            text: "Explain how artificial intelligence uses data to make predictions."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "IC.SI.9-10.1",
+                            text: "Analyze the beneficial and harmful effects of bias in computing innovations."
+                        }
+                    ]
+                }
+            },
+            georgia: {
+                title: "Georgia Computer Science Standards",
+                sections: {
+                    "Computer Science": [
+                        {
+                            code: "CS-IT-1.11",
+                            text: "Explain how artificial intelligence and machine learning are used in computing."
+                        },
+                        {
+                            code: "CS-IT-1.12",
+                            text: "Analyze how data is used to make decisions in everyday applications."
+                        }
+                    ],
+                    "Social Studies": [
+                        {
+                            code: "SSCG24",
+                            text: "Analyze the impact of technology on Georgia, the United States, and the world."
+                        }
+                    ]
+                }
+            },
+            north_carolina: {
+                title: "North Carolina Computer Science Standards",
+                sections: {
+                    "Data and Analysis": [
+                        {
+                            code: "B1.DA.9",
+                            text: "Explain how data can be used to make predictions and decisions."
+                        }
+                    ],
+                    "Artificial Intelligence": [
+                        {
+                            code: "B1.AI.1",
+                            text: "Describe how artificial intelligence uses data to solve problems."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "B1.IC.20",
+                            text: "Explain the beneficial and harmful effects of computing innovations on society."
+                        }
+                    ]
+                }
+            },
+            michigan: {
+                title: "Michigan Computer Science Standards",
+                sections: {
+                    "Data and Analysis": [
+                        {
+                            code: "9-12.DA.IM.1",
+                            text: "Evaluate the tradeoffs in how data is organized and stored."
+                        }
+                    ],
+                    "Artificial Intelligence": [
+                        {
+                            code: "9-12.AI.A.1",
+                            text: "Explain how artificial intelligence systems learn from data."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "9-12.IC.SI.2",
+                            text: "Analyze the impact and effect of bias and equity deficits in computing systems."
+                        }
+                    ]
+                }
+            },
+            virginia: {
+                title: "Virginia Computer Science Standards",
+                sections: {
+                    "Machine Learning": [
+                        {
+                            code: "CS.9-12.15",
+                            text: "Explain how machine learning systems work and are applied in the real world."
+                        },
+                        {
+                            code: "CS.9-12.18",
+                            text: "Evaluate how computing impacts personal, ethical, social, and economic practices."
+                        }
+                    ],
+                    "Problem Solving": [
+                        {
+                            code: "CS.6-8.13",
+                            text: "Compare and contrast various problem-solving approaches."
+                        }
+                    ]
+                }
+            },
+            washington: {
+                title: "Washington Computer Science K-12 Learning Standards",
+                sections: {
+                    "Artificial Intelligence": [
+                        {
+                            code: "9-12.AI.A.01",
+                            text: "Describe how machine learning systems use data to learn patterns."
+                        },
+                        {
+                            code: "9-12.AI.A.02",
+                            text: "Explain how the quality and diversity of data affect machine learning outcomes."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "9-12.IC.SI.01",
+                            text: "Evaluate computational artifacts with regard to improving their beneficial effects and reducing harmful effects on different groups."
+                        }
+                    ]
+                }
+            },
+            mississippi: {
+                title: "Mississippi College and Career Readiness Standards",
+                sections: {
+                    "Computer Science": [
+                        {
+                            code: "CS.9-12.1",
+                            text: "Analyze the impact of computing on society, including economic, social, ethical, and legal aspects."
+                        },
+                        {
+                            code: "CS.9-12.4",
+                            text: "Describe how computational thinking concepts are applied to solving problems."
+                        },
+                        {
+                            code: "CS.9-12.7",
+                            text: "Explain how artificial intelligence and machine learning algorithms work."
+                        },
+                        {
+                            code: "CS.9-12.11",
+                            text: "Evaluate the impact of bias in computing systems and algorithms."
+                        }
+                    ],
+                    "English Language Arts": [
+                        {
+                            code: "ELA.11-12.RI.3",
+                            text: "Analyze a complex set of ideas or sequence of events and explain how specific individuals, ideas, or events interact and develop."
+                        }
+                    ]
+                }
+            },
+            colorado: {
+                title: "Colorado Computer Science Standards",
+                sections: {
+                    "Artificial Intelligence": [
+                        {
+                            code: "HS.AI.1",
+                            text: "Explain how machine learning systems learn patterns from data."
+                        },
+                        {
+                            code: "HS.AI.2",
+                            text: "Analyze how training data affects machine learning model performance."
+                        }
+                    ],
+                    "Data and Analysis": [
+                        {
+                            code: "HS.DA.1",
+                            text: "Evaluate how data collection and analysis can be used to solve problems."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "HS.IC.1",
+                            text: "Evaluate the impact of computing on personal, economic, and social life."
+                        },
+                        {
+                            code: "HS.IC.2",
+                            text: "Analyze issues of bias and equity in computing systems."
+                        }
+                    ]
+                }
+            },
+            ccss_math: {
+                title: "Common Core State Standards - Mathematics",
+                sections: {
+                    "Standards for Mathematical Practice": [
+                        {
+                            code: "MP.1",
+                            text: "Make sense of problems and persevere in solving them. Students analyze givens, constraints, relationships, and goals when solving problems."
+                        },
+                        {
+                            code: "MP.2",
+                            text: "Reason abstractly and quantitatively. Students make sense of quantities and their relationships in problem situations."
+                        },
+                        {
+                            code: "MP.3",
+                            text: "Construct viable arguments and critique the reasoning of others. Students justify their conclusions and respond to the arguments of others."
+                        },
+                        {
+                            code: "MP.4",
+                            text: "Model with mathematics. Students apply mathematics to solve problems arising in everyday life, society, and the workplace."
+                        }
+                    ],
+                    "Statistics and Probability": [
+                        {
+                            code: "S-IC.1",
+                            text: "Understand statistics as a process for making inferences about population parameters based on a random sample from that population."
+                        }
+                    ]
+                }
+            },
+            ngss: {
+                title: "Next Generation Science Standards (NGSS)",
+                sections: {
+                    "Science and Engineering Practices": [
+                        {
+                            code: "Developing and Using Models",
+                            text: "Students develop, use, and revise models to describe, test, and predict phenomena. Machine learning models demonstrate how systems learn patterns to make predictions."
+                        },
+                        {
+                            code: "Analyzing and Interpreting Data",
+                            text: "Students analyze data to make sense of phenomena. Machine learning demonstrates how large datasets reveal patterns invisible to human analysis."
+                        },
+                        {
+                            code: "Using Mathematics and Computational Thinking",
+                            text: "Students use computational thinking to analyze systems. Understanding how AI learns from data builds foundational computational literacy."
+                        },
+                        {
+                            code: "Obtaining, Evaluating, and Communicating Information",
+                            text: "Students critically evaluate information sources. Understanding AI training data bias develops skills to evaluate algorithmic information sources."
+                        }
+                    ],
+                    "Crosscutting Concepts": [
+                        {
+                            code: "Patterns",
+                            text: "Students recognize patterns in data and use them to make predictions. Machine learning is fundamentally about discovering and applying patterns."
+                        },
+                        {
+                            code: "Cause and Effect",
+                            text: "Students identify causal relationships. Understanding how training data causes AI behavior helps students analyze technological systems."
+                        }
+                    ]
+                }
+            },
+            iste: {
+                title: "ISTE Standards for Students",
+                sections: {
+                    "1. Empowered Learner": [
+                        {
+                            code: "1.d",
+                            text: "Students understand the fundamental concepts of technology operations, demonstrate the ability to choose, use and troubleshoot current technologies."
+                        }
+                    ],
+                    "3. Knowledge Constructor": [
+                        {
+                            code: "3.b",
+                            text: "Students evaluate the accuracy, perspective, credibility and relevance of information, media, data or other resources."
+                        },
+                        {
+                            code: "3.d",
+                            text: "Students build knowledge by actively exploring real-world issues and problems, developing ideas and theories and pursuing answers and solutions."
+                        }
+                    ],
+                    "4. Innovative Designer": [
+                        {
+                            code: "4.a",
+                            text: "Students know and use a deliberate design process for generating ideas, testing theories, creating innovative artifacts or solving authentic problems."
+                        }
+                    ],
+                    "5. Computational Thinker": [
+                        {
+                            code: "5.b",
+                            text: "Students collect data or identify relevant data sets, use digital tools to analyze them, and represent data in various ways to facilitate problem-solving and decision-making."
+                        },
+                        {
+                            code: "5.d",
+                            text: "Students understand how automation works and use algorithmic thinking to develop a sequence of steps to create and test automated solutions."
+                        }
+                    ],
+                    "7. Global Collaborator": [
+                        {
+                            code: "7.b",
+                            text: "Students use collaborative technologies to work with others to examine issues and problems from multiple viewpoints."
+                        }
+                    ]
+                }
+            },
+            csta: {
+                title: "CSTA K-12 Computer Science Standards",
+                sections: {
+                    "Data and Analysis": [
+                        {
+                            code: "3A-DA-12",
+                            text: "Create computational models that represent the relationships among different elements of data collected from a phenomenon or process."
+                        }
+                    ],
+                    "Algorithms and Programming": [
+                        {
+                            code: "3A-AP-13",
+                            text: "Create prototypes that use algorithms to solve computational problems by leveraging prior student knowledge and personal interests."
+                        }
+                    ],
+                    "Impacts of Computing": [
+                        {
+                            code: "3A-IC-24",
+                            text: "Evaluate the ways computing impacts personal, ethical, social, economic, and cultural practices."
+                        },
+                        {
+                            code: "3B-IC-25",
+                            text: "Evaluate computational artifacts to maximize their beneficial effects and minimize harmful effects on society."
+                        },
+                        {
+                            code: "3B-IC-26",
+                            text: "Evaluate the impact of equity, access, and influence on the distribution of computing resources in a global society."
+                        }
+                    ],
+                    "Artificial Intelligence": [
+                        {
+                            code: "3B-AI-01",
+                            text: "Explain the capabilities and limitations of current artificial intelligence technologies."
+                        },
+                        {
+                            code: "3B-AI-02",
+                            text: "Describe how machine learning algorithms are trained on data to make predictions or decisions."
+                        }
+                    ]
+                }
+            },
+            c3: {
+                title: "C3 Framework - College, Career, and Civic Life",
+                sections: {
+                    "Dimension 2 - Economics": [
+                        {
+                            code: "D2.Eco.1.9-12",
+                            text: "Analyze how incentives influence choices that may result in policies with a range of costs and benefits for different groups."
+                        },
+                        {
+                            code: "D2.Eco.14.9-12",
+                            text: "Analyze how technological innovations have affected economic decision-making and behaviors."
+                        }
+                    ],
+                    "Dimension 2 - Civics": [
+                        {
+                            code: "D2.Civ.14.9-12",
+                            text: "Analyze historical, contemporary, and emerging means of changing societies, promoting the common good, and protecting rights."
+                        }
+                    ],
+                    "Dimension 3 - Evaluating Sources and Using Evidence": [
+                        {
+                            code: "D3.1.9-12",
+                            text: "Gather relevant information from multiple sources representing a wide range of views while using the origin, authority, structure, context, and corroborative value of sources to guide the selection."
+                        },
+                        {
+                            code: "D3.3.9-12",
+                            text: "Identify evidence that draws information directly and substantively from multiple sources to detect inconsistencies and contradictions."
+                        }
+                    ],
+                    "Dimension 4 - Communicating Conclusions": [
+                        {
+                            code: "D4.1.9-12",
+                            text: "Construct arguments using precise and knowledgeable claims, with evidence from multiple sources, while acknowledging counterclaims and evidentiary weaknesses."
+                        }
+                    ]
+                }
+            }
+        };
 
-        <div class="selector-section">
-            <label for="state-select">Select Your State/Framework:</label>
-            <select id="state-select" onchange="showStandards()">
-                <option value="">-- Choose State Standards --</option>
-                <option value="texas">Texas (TEKS)</option>
-                <option value="california">California</option>
-                <option value="florida">Florida</option>
-                <option value="new-york">New York</option>
-                <option value="pennsylvania">Pennsylvania</option>
-                <option value="illinois">Illinois</option>
-                <option value="ohio">Ohio</option>
-                <option value="georgia">Georgia</option>
-                <option value="north-carolina">North Carolina</option>
-                <option value="michigan">Michigan</option>
-                <option value="virginia">Virginia</option>
-                <option value="washington">Washington</option>
-                <option value="mississippi">Mississippi</option>
-                <option value="c3">C3 Framework (Social Studies)</option>
-            </select>
-        </div>
+        document.getElementById('stateSelector').addEventListener('change', function() {
+            const selectedState = this.value;
+            const displayDiv = document.getElementById('standardsDisplay');
+            
+            if (selectedState && standardsData[selectedState]) {
+                displayStandards(selectedState);
+                displayDiv.style.display = 'block';
+            } else {
+                displayDiv.style.display = 'none';
+            }
+        });
 
-        <!-- Texas Standards -->
-        <div id="texas" class="standards-content">
-            <div class="standard-section">
-                <h2>Texas Essential Knowledge and Skills (TEKS)</h2>
+        function displayStandards(state) {
+            const data = standardsData[state];
+            const displayDiv = document.getElementById('standardsDisplay');
+            
+            let html = `
+                <div class="standards-header">
+                    <h2>${data.title}</h2>
+                    <p>Standards addressed in Lesson 2.2</p>
+                </div>
+            `;
+            
+            for (const [sectionName, standards] of Object.entries(data.sections)) {
+                html += `
+                    <div class="standards-section">
+                        <h3>${sectionName}</h3>
+                `;
                 
-                <div class="standard-item">
-                    <div class="standard-code">§112.34(c)(1)(E) - Technology Applications</div>
-                    <div class="standard-description">Identify, understand, and use appropriate digital learning terminology.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Students learn essential machine learning vocabulary including "training data," "pattern recognition," "algorithm," and "bias"—critical terminology for understanding how modern AI systems work.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">§112.34(c)(3)(A) - Critical Thinking and Problem Solving</div>
-                    <div class="standard-description">Evaluate the appropriateness of different tools for completing a task.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Students analyze when machine learning is appropriate (pattern recognition tasks like face/speech recognition) versus when traditional programming works better (rule-based tasks), developing critical tool selection skills.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">§112.34(c)(6)(A) - Computational Thinking</div>
-                    <div class="standard-description">Identify the steps required to complete a task and create algorithms.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Through the handwritten digit example and robin analogy, students understand the algorithmic process of machine learning: providing training data, pattern recognition through trial and error, and making predictions based on learned patterns.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">§113.41(c)(1)(B) - Social Studies Skills</div>
-                    <div class="standard-description">Analyze and evaluate the validity of information, arguments, and counterarguments from primary and secondary sources for bias, propaganda, point of view, and frame of reference.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Introduction to bias in training data develops critical analysis skills—understanding that AI learns from biased examples prepares students for evaluating algorithmic decision-making in social contexts (developed fully in Chapters 5-6).
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">§113.41(c)(21)(A) - Science, Technology, and Society</div>
-                    <div class="standard-description">Explain the roles of science and technology in contemporary society.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Understanding machine learning's capabilities (medical diagnosis, language translation, recommendation systems) and limitations (data requirements, unexplainable decisions, learned biases) helps students analyze technology's role in modern society.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Key Lesson Connections to TEKS</h3>
-                <ul>
-                    <li><strong>Sections B-C:</strong> Build computational thinking through understanding algorithmic pattern learning</li>
-                    <li><strong>Section D:</strong> Apply tool evaluation skills to contrast ML with traditional programming</li>
-                    <li><strong>Section F:</strong> Develop critical analysis of bias and data quality issues</li>
-                    <li><strong>Sections E-G:</strong> Analyze technology's role through real-world ML applications</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- California Standards -->
-        <div id="california" class="standards-content">
-            <div class="standard-section">
-                <h2>California Computer Science Standards</h2>
+                standards.forEach(standard => {
+                    html += `
+                        <div class="standard-item">
+                            <div class="standard-code">${standard.code}</div>
+                            <div class="standard-text">${standard.text}</div>
+                        </div>
+                    `;
+                });
                 
-                <div class="standard-item">
-                    <div class="standard-code">6-8.Algorithms and Programming.2</div>
-                    <div class="standard-description">Evaluate and refine computational artifacts with the goal of making them more inclusive and accessible.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Discussion of training data bias introduces students to how AI systems can be more or less inclusive based on whose data is represented—a foundational concept for creating accessible, equitable technology.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.Algorithms and Programming.3</div>
-                    <div class="standard-description">Explain how artificial intelligence works and demonstrate its societal and economic impact.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson explicitly explains machine learning mechanisms (training data, pattern recognition, trial and error) and demonstrates societal impact through real-world applications in medicine, translation, recommendations, and voice assistants.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.Data and Analysis.1</div>
-                    <div class="standard-description">Explain how data can be organized, interpreted, and used to construct new knowledge.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Machine learning examples show how organized training data (labeled images, recorded speech, translated text) is interpreted through pattern recognition to construct new knowledge (ability to recognize never-before-seen examples).
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.Impacts of Computing.2</div>
-                    <div class="standard-description">Evaluate the ways that computing impacts personal, ethical, social, and economic practices.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson addresses ethical concerns (bias in training data), social impacts (whose experiences are represented), and economic applications (recommendation systems, medical diagnosis), laying groundwork for deeper ethics exploration in later chapters.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>California Framework Connections</h3>
-                <ul>
-                    <li><strong>AI Literacy:</strong> Core explanation of machine learning mechanisms</li>
-                    <li><strong>Data Science:</strong> Understanding how data quality determines system capabilities</li>
-                    <li><strong>Equity and Inclusion:</strong> Recognition that training data biases affect AI outputs</li>
-                    <li><strong>Real-World Application:</strong> Medical, linguistic, and consumer applications</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Florida Standards -->
-        <div id="florida" class="standards-content">
-            <div class="standard-section">
-                <h2>Florida Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">SC.912.CS-CS.3.2</div>
-                    <div class="standard-description">Explain how different types of data are processed and stored.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Examples demonstrate how different data types (images, audio, text) are processed through pattern recognition in machine learning, discovering statistical relationships that enable predictions.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">SC.912.CS-CP.2.4</div>
-                    <div class="standard-description">Describe how artificial intelligence algorithms work.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson explicitly describes machine learning algorithm process: training on labeled examples, finding mathematical patterns through trial and error, making predictions based on learned patterns without explicit rule-programming.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">SC.912.CS-PC.3.1</div>
-                    <div class="standard-description">Evaluate the beneficial and harmful effects of emerging technologies on society.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Students evaluate ML's beneficial effects (medical diagnosis, accessibility through voice assistants, language translation) and harmful potential (bias from training data, unexplainable decisions, learned prejudices).
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Florida Standards Integration</h3>
-                <ul>
-                    <li><strong>AI Fundamentals:</strong> Clear explanation of how machine learning algorithms function</li>
-                    <li><strong>Data Processing:</strong> Understanding pattern recognition across different data types</li>
-                    <li><strong>Impact Analysis:</strong> Critical evaluation of ML's societal benefits and risks</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- New York Standards -->
-        <div id="new-york" class="standards-content">
-            <div class="standard-section">
-                <h2>New York Computer Science and Digital Fluency Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">9-12.CT.9</div>
-                    <div class="standard-description">Explain how machine learning and artificial intelligence work.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson provides comprehensive explanation of machine learning through concrete examples (handwritten digits, cat recognition, robin learning), making abstract concepts accessible through relatable analogies.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.CT.10</div>
-                    <div class="standard-description">Discuss the ethical, social, and economic implications of artificial intelligence.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Introduction to training data bias raises ethical questions about fairness and representation. Discussion of unexplainable AI decisions introduces accountability concerns. Real-world applications illustrate economic impact across industries.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.DL.2</div>
-                    <div class="standard-description">Evaluate the validity and credibility of digital content.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Understanding that AI learns patterns without understanding meaning helps students critically evaluate AI-generated content and recommendations, recognizing that pattern-matching isn't the same as verification or truth.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Connection to NY Learning Standards</h3>
-                <ul>
-                    <li><strong>AI Literacy:</strong> Foundational understanding of machine learning mechanisms</li>
-                    <li><strong>Ethical Reasoning:</strong> Introduction to bias, fairness, and accountability issues</li>
-                    <li><strong>Critical Evaluation:</strong> Recognizing limitations of pattern-based systems</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Pennsylvania Standards -->
-        <div id="pennsylvania" class="standards-content">
-            <div class="standard-section">
-                <h2>Pennsylvania Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">15.4.8-12.D - Data and Analysis</div>
-                    <div class="standard-description">Use and interpret data to solve problems and make informed decisions.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Understanding how machine learning uses training data to make predictions helps students interpret AI-generated recommendations and decisions, recognizing that data quality determines output quality.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">15.4.8-12.E - Algorithms and Programming</div>
-                    <div class="standard-description">Demonstrate how algorithms make use of iteration and selection to solve problems.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Machine learning process demonstrates iteration (repeated trial and error adjustments) and selection (choosing patterns that best match training data labels), showing algorithmic problem-solving without explicit rule-writing.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">15.4.8-12.G - Impacts of Computing</div>
-                    <div class="standard-description">Evaluate the social and ethical ramifications of computing technologies.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Discussion of training data bias, unexplainable decisions, and pattern recognition without understanding introduces ethical concerns that pervade AI applications—preview of deeper exploration in Chapters 5-6.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Pennsylvania Standards Integration</h3>
-                <ul>
-                    <li><strong>Data Literacy:</strong> Understanding relationship between data quality and AI capabilities</li>
-                    <li><strong>Algorithmic Thinking:</strong> Grasping iteration and selection in learning processes</li>
-                    <li><strong>Social Impact:</strong> Foundation for evaluating computing's ethical implications</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Illinois Standards -->
-        <div id="illinois" class="standards-content">
-            <div class="standard-section">
-                <h2>Illinois Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">9-12.DA.7</div>
-                    <div class="standard-description">Evaluate the ability of models and simulations to formulate, refine, and test hypotheses.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Machine learning examples show how AI models form hypotheses about patterns (e.g., "this combination of pixels indicates a cat"), test those hypotheses against new data, and refine patterns through trial and error.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.AP.17</div>
-                    <div class="standard-description">Describe how artificial intelligence drives many software and physical systems.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Real-world examples demonstrate ML driving voice assistants, recommendation systems, medical diagnosis software, translation services, and autonomous vehicles—showing AI's pervasive role in modern systems.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.IC.25</div>
-                    <div class="standard-description">Evaluate computational artifacts with regard to improving their beneficial effects and reducing harmful effects on different groups of users.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Training data bias discussion introduces how ML systems can benefit or harm different user groups depending on whose data is represented—critical for evaluating algorithmic fairness.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Illinois Framework Connections</h3>
-                <ul>
-                    <li><strong>Model Evaluation:</strong> Understanding how ML systems test and refine hypotheses</li>
-                    <li><strong>System Analysis:</strong> Recognizing AI's role across software and physical systems</li>
-                    <li><strong>Equity Focus:</strong> Evaluating impacts on different user groups</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Ohio Standards -->
-        <div id="ohio" class="standards-content">
-            <div class="standard-section">
-                <h2>Ohio Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">ATP.M.9-10.1</div>
-                    <div class="standard-description">Use data and information to make informed decisions about computational artifacts and solving problems.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Understanding that machine learning quality depends on training data helps students make informed decisions about when to trust AI recommendations and when skepticism is warranted.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">AI.A.9-12.2</div>
-                    <div class="standard-description">Explain how artificial intelligence uses data to make predictions.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson explicitly explains ML prediction mechanism: learning statistical patterns from labeled training data, then applying those patterns to make predictions about new, unseen examples (handwritten digits, cat photos).
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">IC.SI.9-10.1</div>
-                    <div class="standard-description">Analyze the beneficial and harmful effects of bias in computing innovations.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Training data bias section introduces how biased examples lead to biased AI—if face recognition trains mostly on light-skinned faces, it performs poorly on darker-skinned faces, demonstrating harmful effects of bias.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Ohio Standards Integration</h3>
-                <ul>
-                    <li><strong>Data-Driven Decisions:</strong> Understanding data quality's role in AI reliability</li>
-                    <li><strong>AI Prediction Mechanisms:</strong> Clear explanation of how ML makes predictions from patterns</li>
-                    <li><strong>Bias Analysis:</strong> Foundation for examining beneficial and harmful effects</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Georgia Standards -->
-        <div id="georgia" class="standards-content">
-            <div class="standard-section">
-                <h2>Georgia Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">CS-IT-1.11</div>
-                    <div class="standard-description">Explain how artificial intelligence and machine learning are used in computing.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson provides comprehensive explanation of machine learning through accessible examples, demonstrating applications across voice recognition, image analysis, language translation, and recommendation systems.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">CS-IT-1.12</div>
-                    <div class="standard-description">Analyze how data is used to make decisions in everyday applications.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Examples show how ML uses training data to make decisions: Spotify analyzing listening history for recommendations, medical AI diagnosing from scan patterns, voice assistants learning speech recognition from recorded examples.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">SSCG24</div>
-                    <div class="standard-description">Analyze the impact of technology on Georgia, the United States, and the world.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Understanding machine learning's capabilities and limitations prepares students to analyze technology's impact on healthcare (diagnosis), communication (translation), economy (recommendations), and justice (algorithmic decisions)—topics developed in later chapters.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Georgia Framework Connections</h3>
-                <ul>
-                    <li><strong>AI/ML Fundamentals:</strong> Clear explanation of how machine learning functions</li>
-                    <li><strong>Data-Driven Society:</strong> Understanding how data shapes everyday decisions</li>
-                    <li><strong>Technology Impact:</strong> Foundation for analyzing broader societal effects</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- North Carolina Standards -->
-        <div id="north-carolina" class="standards-content">
-            <div class="standard-section">
-                <h2>North Carolina Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">B1.DA.9</div>
-                    <div class="standard-description">Explain how data can be used to make predictions and decisions.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Machine learning examples explicitly demonstrate prediction mechanisms: training on labeled data (handwritten digits, cat photos, speech recordings), finding patterns, making predictions about new examples.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">B1.AI.1</div>
-                    <div class="standard-description">Describe how artificial intelligence uses data to solve problems.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson shows how ML solves problems that traditional programming cannot (cat recognition, speech understanding, handwriting interpretation) by learning patterns from massive training datasets rather than following explicit rules.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">B1.IC.20</div>
-                    <div class="standard-description">Explain the beneficial and harmful effects of computing innovations on society.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Discussion balances beneficial effects (medical diagnosis, accessibility tools, language translation) with harmful potential (biased training data leading to discriminatory outcomes, unexplainable decisions affecting people's lives).
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>North Carolina Standards Integration</h3>
-                <ul>
-                    <li><strong>Data Science:</strong> Understanding how data enables predictions and decisions</li>
-                    <li><strong>AI Problem-Solving:</strong> Recognizing ML's unique problem-solving approach</li>
-                    <li><strong>Impact Analysis:</strong> Evaluating both benefits and harms of AI innovation</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Michigan Standards -->
-        <div id="michigan" class="standards-content">
-            <div class="standard-section">
-                <h2>Michigan Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">9-12.DA.IM.1</div>
-                    <div class="standard-description">Evaluate the tradeoffs in how data is organized and stored.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Discussion of training data requirements introduces tradeoffs: massive datasets enable better pattern learning but require enormous storage, collection effort, and raise privacy concerns about whose data is used.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.AI.A.1</div>
-                    <div class="standard-description">Explain how artificial intelligence systems learn from data.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Core lesson objective—explains three-step learning process: providing labeled training data, pattern recognition through mathematical algorithms, trial-and-error refinement to improve accuracy without explicit rule programming.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.IC.SI.2</div>
-                    <div class="standard-description">Analyze the impact and impact of bias and equity deficits in computing systems.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Training data bias section demonstrates how biased or incomplete training data creates biased AI outputs—face recognition example shows how underrepresentation in training data creates equity deficits in system performance.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Michigan Framework Connections</h3>
-                <ul>
-                    <li><strong>Data Management:</strong> Understanding tradeoffs in data collection and use</li>
-                    <li><strong>AI Learning:</strong> Clear explanation of learning mechanisms from data</li>
-                    <li><strong>Equity Analysis:</strong> Recognizing how bias creates inequitable outcomes</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Virginia Standards -->
-        <div id="virginia" class="standards-content">
-            <div class="standard-section">
-                <h2>Virginia Computer Science Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">CS.9-12.15</div>
-                    <div class="standard-description">Explain how machine learning systems work and are applied in the real world.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson comprehensively explains ML mechanisms (training data, pattern recognition, trial and error) and demonstrates real-world applications including medical diagnosis, voice assistants, translation services, recommendation systems, and autonomous vehicles.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">CS.9-12.18</div>
-                    <div class="standard-description">Evaluate how computing impacts personal, ethical, social, and economic practices.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Discussion addresses personal impact (recommendation algorithms shaping choices), ethical concerns (bias and fairness), social implications (whose data matters), and economic effects (ML transforming industries from healthcare to retail).
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">CS.6-8.13</div>
-                    <div class="standard-description">Compare and contrast various problem-solving approaches.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson explicitly contrasts traditional programming (explicit rules) with machine learning (pattern discovery), helping students understand when each approach is most effective and why both are valuable problem-solving tools.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Virginia Standards Integration</h3>
-                <ul>
-                    <li><strong>ML Fundamentals:</strong> Complete explanation of how machine learning functions</li>
-                    <li><strong>Real-World Applications:</strong> Diverse examples across industries and domains</li>
-                    <li><strong>Problem-Solving Approaches:</strong> Comparing ML with traditional programming methods</li>
-                    <li><strong>Multidimensional Impact:</strong> Personal, ethical, social, and economic considerations</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Washington Standards -->
-        <div id="washington" class="standards-content">
-            <div class="standard-section">
-                <h2>Washington Computer Science K-12 Learning Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">9-12.AI.A.01</div>
-                    <div class="standard-description">Describe how machine learning systems use data to learn patterns.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Core lesson focus—explains how ML uses labeled training data to discover statistical patterns through iterative refinement, demonstrating with handwritten digit recognition and cat photo classification examples.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.AI.A.02</div>
-                    <div class="standard-description">Explain how the quality and diversity of data affect machine learning outcomes.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Training data limitations section explicitly addresses how data quality (accuracy, completeness) and diversity (whose experiences are represented) directly determine AI capabilities and biases—face recognition example demonstrates this principle.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">9-12.IC.SI.01</div>
-                    <div class="standard-description">Evaluate computational artifacts with regard to improving their beneficial effects and reducing harmful effects on different groups.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Students evaluate ML's benefits (accessibility through voice assistants, improved medical diagnosis) and harms (biased training data causing discrimination, unexplainable decisions affecting fairness), learning to assess impacts on different user groups.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Washington Framework Connections</h3>
-                <ul>
-                    <li><strong>ML Mechanisms:</strong> Understanding how systems learn from data patterns</li>
-                    <li><strong>Data Quality:</strong> Recognizing critical role of data diversity and quality</li>
-                    <li><strong>Equity Evaluation:</strong> Assessing beneficial and harmful effects on different groups</li>
-                    <li><strong>Algorithmic Fairness:</strong> Foundation for evaluating computational artifact impacts</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Mississippi Standards -->
-        <div id="mississippi" class="standards-content">
-            <div class="standard-section">
-                <h2>Mississippi College and Career Readiness Standards</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">CS.9-12.1</div>
-                    <div class="standard-description">Analyze the impact of computing on society, including economic, social, ethical, and legal aspects.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Machine learning's societal impact is examined across dimensions: economic (recommendation systems transforming commerce), social (whose data is represented), ethical (bias and fairness in AI decisions), preparing students for deeper analysis in Chapters 5-6.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">CS.9-12.4</div>
-                    <div class="standard-description">Describe how computational thinking concepts are applied to solving problems.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Machine learning demonstrates computational problem-solving through pattern recognition, decomposing complex recognition tasks (faces, speech, handwriting) into learnable patterns from training data rather than explicit rule-writing.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">CS.9-12.7</div>
-                    <div class="standard-description">Explain how artificial intelligence and machine learning algorithms work.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson explicitly explains ML algorithm operation: receiving labeled training examples, using mathematical pattern recognition to find correlations, making predictions through learned patterns, improving through trial-and-error feedback.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">CS.9-12.11</div>
-                    <div class="standard-description">Evaluate the impact of bias in computing systems and algorithms.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Training data bias discussion introduces how ML systems inherit biases from their training data—if data underrepresents certain groups, AI performs poorly for those groups, creating inequitable outcomes that affect real people's lives.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">ELA.11-12.RI.3</div>
-                    <div class="standard-description">Analyze a complex set of ideas or sequence of events and explain how specific individuals, ideas, or events interact and develop.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Students analyze the complex interaction between training data quality, pattern recognition algorithms, and AI capabilities—understanding how these elements interact to produce both powerful capabilities and concerning limitations.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>Mississippi Framework Connections</h3>
-                <ul>
-                    <li><strong>Multidimensional Impact Analysis:</strong> Economic, social, ethical, and legal considerations</li>
-                    <li><strong>Computational Problem-Solving:</strong> Pattern recognition as problem-solving approach</li>
-                    <li><strong>AI/ML Fundamentals:</strong> Clear explanation of algorithm operation and mechanisms</li>
-                    <li><strong>Bias Evaluation:</strong> Critical analysis of bias sources and impacts</li>
-                    <li><strong>Complex Systems Thinking:</strong> Understanding interactions between data, algorithms, and outcomes</li>
-                </ul>
-            </div>
-
-            <div class="framework-note">
-                <strong>Career and Technical Education Connection:</strong> Understanding machine learning is essential workforce literacy across industries. From healthcare (diagnosis algorithms) to retail (recommendation systems) to manufacturing (quality control), ML increasingly powers business operations. Students who understand both capabilities and limitations of AI systems will be better prepared for 21st century careers.
-            </div>
-        </div>
-
-        <!-- C3 Framework -->
-        <div id="c3" class="standards-content">
-            <div class="standard-section">
-                <h2>C3 Framework for Social Studies</h2>
-                
-                <div class="standard-item">
-                    <div class="standard-code">D2.Eco.1.9-12</div>
-                    <div class="standard-description">Analyze how incentives influence choices that may result in policies with a range of costs and benefits for different groups.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Understanding ML capabilities and limitations helps students analyze technology policy choices—why companies choose ML approaches (economic incentives), how these choices create benefits for some groups (better service) and costs for others (privacy concerns, bias impacts).
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">D2.Civ.14.9-12</div>
-                    <div class="standard-description">Analyze historical, contemporary, and emerging means of changing societies, promoting the common good, and protecting rights.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Machine learning represents emerging means of changing society (transforming healthcare, communication, commerce). Understanding how ML works enables students to analyze whether these changes promote common good and protect rights—crucial for informed civic participation.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">D3.1.9-12</div>
-                    <div class="standard-description">Gather relevant information from multiple sources representing a wide range of views while using the origin, authority, structure, context, and corroborative value of sources to guide the selection.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Understanding that AI learns from training data helps students evaluate information sources—recognizing that AI recommendations and predictions reflect their training data's biases, not objective truth, developing critical information literacy.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">D3.3.9-12</div>
-                    <div class="standard-description">Identify evidence that draws information directly and substantively from multiple sources to detect inconsistencies and contradictions.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Students learn to identify when AI systems might produce inconsistent or biased outputs due to training data limitations, developing skills to detect contradictions between AI claims and reality—essential for evaluating algorithmic decision-making.
-                    </div>
-                </div>
-
-                <div class="standard-item">
-                    <div class="standard-code">D4.1.9-12</div>
-                    <div class="standard-description">Construct arguments using precise and knowledgeable claims, with evidence from multiple sources, while acknowledging counterclaims and evidentiary weaknesses.</div>
-                    <div class="alignment-note">
-                        <strong>Lesson Alignment:</strong> Lesson presents both ML's capabilities (revolutionary pattern recognition enabling previously impossible tasks) and limitations (data requirements, bias, unexplainability), modeling how to construct nuanced arguments acknowledging both strengths and weaknesses.
-                    </div>
-                </div>
-            </div>
-
-            <div class="key-connections">
-                <h3>C3 Framework Integration</h3>
-                <ul>
-                    <li><strong>Inquiry Arc:</strong> Developing questions about how technology shapes society</li>
-                    <li><strong>Civic Competence:</strong> Understanding technology mechanisms enables informed citizenship</li>
-                    <li><strong>Evidence-Based Reasoning:</strong> Evaluating sources and detecting bias in AI systems</li>
-                    <li><strong>Contemporary Issues:</strong> Machine learning as emerging force changing society</li>
-                    <li><strong>Critical Analysis:</strong> Examining costs, benefits, and tradeoffs of technological choices</li>
-                </ul>
-            </div>
-
-            <div class="framework-note">
-                <strong>Note on Social Studies Integration:</strong> Understanding machine learning is foundational for analyzing contemporary society. ML increasingly drives decisions in criminal justice (risk assessment), economics (lending, hiring), healthcare (diagnosis), and politics (targeted messaging). Students who understand how these systems work—learning patterns from biased data, making unexplainable predictions, affecting different groups differently—are better equipped to participate in democratic governance of these powerful technologies. This lesson provides essential literacy for later chapters examining AI's role in hiring (6.2), lending (6.3), criminal justice (6.4), and democracy (Chapter 7).
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<script>
-function showStandards() {
-    // Hide all standards content
-    const allContent = document.querySelectorAll('.standards-content');
-    allContent.forEach(content => {
-        content.classList.remove('active');
-    });
-    
-    // Show selected standards content
-    const selector = document.getElementById('state-select');
-    const selectedValue = selector.value;
-    
-    if (selectedValue) {
-        const selectedContent = document.getElementById(selectedValue);
-        if (selectedContent) {
-            selectedContent.classList.add('active');
+                html += `</div>`;
+            }
+            
+            displayDiv.innerHTML = html;
         }
-    }
-}
-</script>
-
+    </script>
 </body>
 </html>
